@@ -1,6 +1,6 @@
 #include "Buffer.hpp"
 #include "SingleTimeCommands.hpp"
-
+#include <cstdio>
 namespace Vulkan {
 
 Buffer::Buffer(const class Device& device, const size_t size, const VkBufferUsageFlags usage) :

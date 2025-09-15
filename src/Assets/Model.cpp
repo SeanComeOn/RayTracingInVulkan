@@ -13,10 +13,80 @@
 #include <chrono>
 #include <filesystem>
 #include <iostream>
+#include <fstream>
 #include <unordered_map>
 #include <vector>
 
 using namespace glm;
+
+// Helper function to check for and merge split OBJ files
+static std::string prepareSplitObjFile(const std::string& filename)
+{
+	// Check if the file exists
+	if (std::filesystem::exists(filename))
+	{
+		return filename; // File exists, use it as-is
+	}
+	
+	// Check if split files exist (e.g., filename.aa, filename.ab, etc.)
+	std::string baseName = filename;
+	std::vector<std::string> splitFiles;
+	
+	// Look for split files with pattern .aa, .ab, .ac, etc.
+	for (char suffix = 'a'; suffix <= 'z'; suffix++)
+	{
+		for (char suffix2 = 'a'; suffix2 <= 'z'; suffix2++)
+		{
+			std::string splitFile = baseName + "." + suffix + suffix2;
+			if (std::filesystem::exists(splitFile))
+			{
+				splitFiles.push_back(splitFile);
+			}
+			else
+			{
+				break; // No more split files found
+			}
+		}
+		if (splitFiles.empty() || splitFiles.back() != baseName + "." + suffix + 'a')
+		{
+			break; // No more split files with this first suffix
+		}
+	}
+	
+	if (!splitFiles.empty())
+	{
+		std::cout << "Found " << splitFiles.size() << " split files for " << filename << std::endl;
+		std::cout << "Merging split files..." << std::endl;
+		
+		// Create the merged file
+		std::ofstream outFile(filename, std::ios::binary);
+		if (!outFile)
+		{
+			std::cerr << "Failed to create merged file: " << filename << std::endl;
+			return filename; // Return original filename and let the loading fail
+		}
+		
+		// Merge all split files
+		for (const auto& splitFile : splitFiles)
+		{
+			std::ifstream inFile(splitFile, std::ios::binary);
+			if (inFile)
+			{
+				outFile << inFile.rdbuf();
+				std::cout << "Merged: " << splitFile << std::endl;
+			}
+			else
+			{
+				std::cerr << "Warning: Could not read split file: " << splitFile << std::endl;
+			}
+		}
+		
+		outFile.close();
+		std::cout << "Successfully merged " << splitFiles.size() << " files into " << filename << std::endl;
+	}
+	
+	return filename;
+}
 
 namespace std
 {
@@ -47,11 +117,14 @@ Model Model::LoadModel(const std::string& filename)
 	std::cout << "- loading '" << filename << "'... " << std::flush;
 
 	const auto timer = std::chrono::high_resolution_clock::now();
-	const std::string materialPath = std::filesystem::path(filename).parent_path().string();
+	
+	// Prepare the file (handle split files if needed)
+	const std::string actualFilename = prepareSplitObjFile(filename);
+	const std::string materialPath = std::filesystem::path(actualFilename).parent_path().string();
 	
 	tinyobj::ObjReader objReader;
 	
-	if (!objReader.ParseFromFile(filename))
+	if (!objReader.ParseFromFile(actualFilename))
 	{
 		Throw(std::runtime_error("failed to load model '" + filename + "':\n" + objReader.Error()));
 	}
@@ -180,11 +253,14 @@ Model Model::LoadModel(const std::string& filename, std::vector<Texture>& sceneT
 	std::cout << "- loading '" << filename << "'... " << std::flush;
 
 	const auto timer = std::chrono::high_resolution_clock::now();
-	const std::string materialPath = std::filesystem::path(filename).parent_path().string();
+	
+	// Prepare the file (handle split files if needed)
+	const std::string actualFilename = prepareSplitObjFile(filename);
+	const std::string materialPath = std::filesystem::path(actualFilename).parent_path().string();
 	
 	tinyobj::ObjReader objReader;
 	
-	if (!objReader.ParseFromFile(filename))
+	if (!objReader.ParseFromFile(actualFilename))
 	{
 		Throw(std::runtime_error("failed to load model '" + filename + "':\n" + objReader.Error()));
 	}

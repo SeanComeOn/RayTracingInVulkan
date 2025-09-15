@@ -39,7 +39,7 @@ int main(int argc, const char* argv[]) noexcept
 			!options.Fullscreen
 		};
 
-		RayTracer application(userSettings, windowConfig, static_cast<VkPresentModeKHR>(options.PresentMode));
+		RayTracer application(userSettings, windowConfig, static_cast<VkPresentModeKHR>(options.PresentMode)); // initialize
 
 		PrintVulkanSdkInformation();
 		PrintVulkanInstanceInformation(application, options.Benchmark);
