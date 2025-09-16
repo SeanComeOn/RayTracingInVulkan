@@ -67,5 +67,13 @@ public:
 	static SceneAssets CounterStrikeNuke(CameraInitialSate& camera);
 	static SceneAssets CounterStrikeVertigo(CameraInitialSate& camera);
 
+	static SceneAssets Kitchen_ycpin(CameraInitialSate &camera);
+	static SceneAssets Bathroom_ycpin(CameraInitialSate &camera);
+	static SceneAssets Bmw_ycpin(CameraInitialSate &camera);
+	static SceneAssets Classroom_ycpin(CameraInitialSate &camera);
+	static SceneAssets House_ycpin(CameraInitialSate &camera);
+	static SceneAssets Staircase_ycpin(CameraInitialSate &camera);
+	static SceneAssets Teapot_ycpin(CameraInitialSate &camera);
+
 	static const std::vector<std::pair<std::string, std::function<SceneAssets (CameraInitialSate&)>>> AllScenes;
 };

@@ -99,7 +99,15 @@ const std::vector<std::pair<std::string, std::function<SceneAssets (SceneList::C
 	{"Mandelbulb Test", MandelbulbScene},
 	{"Reflection Cornell Box & Lucy", ReflectiveCornellBoxLucy}, // REF
 	{"Bathroom", Bathroom}, // BATH
-	{"Chestnut", Chestnut} // CHSNT
+	{"Chestnut", Chestnut}, // CHSNT
+
+	{"Kitchen_ycpin", Kitchen_ycpin},
+	{"Bathroom_ycpin", Bathroom_ycpin},
+	{"Bmw_ycpin", Bmw_ycpin},
+	{"Classroom_ycpin", Classroom_ycpin},
+	{"House_ycpin", House_ycpin},
+	{"Staircase_ycpin", Staircase_ycpin},
+	{"Teapot_ycpin", Teapot_ycpin},
 };
 
 SceneAssets SceneList::CubeAndSpheres(CameraInitialSate& camera)
@@ -1461,4 +1469,166 @@ SceneAssets SceneList::CounterStrikeMap(CameraInitialSate& camera, std::string m
 	std::cout << "done loading" << std::endl;
 
 	return std::forward_as_tuple(std::move(models), std::move(textures));
+}
+
+
+SceneAssets SceneList::Kitchen_ycpin(CameraInitialSate &camera)
+{
+	vec3 cameraPosition = vec3(1.211, 1.80475, 3.85239);
+	vec3 targetPosition = vec3(0, 0, 0);
+	vec3 upDirection = vec3(0, 1, 0);
+
+	camera.ModelView = lookAt(cameraPosition, targetPosition, upDirection);
+
+	camera.FieldOfView = 90.0f;
+	camera.Aperture = 0.05f;
+	camera.FocusDistance = length(cameraPosition - targetPosition);
+	camera.ControlSpeed = 2.0f;
+	camera.GammaCorrection = false;
+	camera.HasSky = true;
+	camera.LightPosition = vec3(0, 0, 0);
+
+	auto kitchen0 = Model::LoadModel("../../../assets/scenes/kitchen.obj");
+	std::vector<Model> models;
+	models.push_back(kitchen0);
+
+	return std::make_tuple(std::move(models), std::vector<Texture>());
+}
+
+SceneAssets SceneList::Bathroom_ycpin(CameraInitialSate &camera)
+{
+	vec3 cameraPosition = vec3(0, 1.25, -0.5);
+	vec3 targetPosition = vec3(-10, 0, -9);
+	vec3 upDirection = vec3(0, 1, 0);
+
+	camera.ModelView = lookAt(cameraPosition, targetPosition, upDirection);
+
+	camera.FieldOfView = 90.0f;
+	camera.Aperture = 0.05f;
+	camera.FocusDistance = length(cameraPosition - targetPosition);
+	camera.ControlSpeed = 2.0f;
+	camera.GammaCorrection = false;
+	camera.HasSky = true;
+	camera.LightPosition = vec3(0, 0, 0);
+
+	auto bathroom0 = Model::LoadModel("../../../assets/scenes/bathroom.obj");
+	std::vector<Model> models;
+	models.push_back(bathroom0);
+
+	return std::make_tuple(std::move(models), std::vector<Texture>());
+}
+
+SceneAssets SceneList::Bmw_ycpin(CameraInitialSate &camera)
+{
+	vec3 cameraPosition = vec3(-4.4, -0.44, 1.0);
+	vec3 targetPosition = vec3(-2, -0.5, 0);
+	vec3 upDirection = vec3(0, 1, 0);
+
+	camera.ModelView = lookAt(cameraPosition, targetPosition, upDirection);
+
+	camera.FieldOfView = 30.0f;
+	camera.Aperture = 0.05f;
+	camera.FocusDistance = length(cameraPosition - targetPosition);
+	camera.ControlSpeed = 2.0f;
+	camera.GammaCorrection = false;
+	camera.HasSky = true;
+	camera.LightPosition = vec3(0, 0, 0);
+
+	auto bmw0 = Model::LoadModel("../../../assets/scenes/bmw.obj");
+	std::vector<Model> models;
+	models.push_back(bmw0);
+
+	return std::make_tuple(std::move(models), std::vector<Texture>());
+}
+
+SceneAssets SceneList::Classroom_ycpin(CameraInitialSate &camera)
+{
+	vec3 cameraPosition = vec3(0, 0, 0);
+	vec3 targetPosition = vec3(0, 0, -1);
+	vec3 upDirection = vec3(0, 1, 0);
+
+	camera.ModelView = lookAt(cameraPosition, targetPosition, upDirection);
+
+	camera.FieldOfView = 90.0f;
+	camera.Aperture = 0.05f;
+	camera.FocusDistance = length(cameraPosition - targetPosition);
+	camera.ControlSpeed = 2.0f;
+	camera.GammaCorrection = false;
+	camera.HasSky = true;
+	camera.LightPosition = vec3(0, 0, 0);
+
+	auto classroom0 = Model::LoadModel("../../../assets/scenes/classroom.obj");
+	std::vector<Model> models;
+	models.push_back(classroom0);
+
+	return std::make_tuple(std::move(models), std::vector<Texture>());
+}
+
+SceneAssets SceneList::House_ycpin(CameraInitialSate &camera)
+{
+	vec3 cameraPosition = vec3(78.51, 14.85, 20.98);
+	vec3 targetPosition = vec3(34.35582, 3.38811, -36.85947);
+	vec3 upDirection = vec3(0, 1, 0);
+
+	camera.ModelView = lookAt(cameraPosition, targetPosition, upDirection);
+
+	camera.FieldOfView = 20.0f;
+	camera.Aperture = 0.05f;
+	camera.FocusDistance = length(cameraPosition - targetPosition);
+	camera.ControlSpeed = 2.0f;
+	camera.GammaCorrection = false;
+	camera.HasSky = true;
+	camera.LightPosition = vec3(0, 0, 0);
+
+	auto house0 = Model::LoadModel("../../../assets/scenes/house.obj");
+	std::vector<Model> models;
+	models.push_back(house0);
+
+	return std::make_tuple(std::move(models), std::vector<Texture>());
+}
+
+SceneAssets SceneList::Staircase_ycpin(CameraInitialSate &camera)
+{
+	vec3 cameraPosition = vec3(0, 0, 0);
+	vec3 targetPosition = vec3(0, 0, -1);
+	vec3 upDirection = vec3(0, 1, 0);
+
+	camera.ModelView = lookAt(cameraPosition, targetPosition, upDirection);
+
+	camera.FieldOfView = 50.0f;
+	camera.Aperture = 0.05f;
+	camera.FocusDistance = length(cameraPosition - targetPosition);
+	camera.ControlSpeed = 2.0f;
+	camera.GammaCorrection = false;
+	camera.HasSky = true;
+	camera.LightPosition = vec3(0, 0, 0);
+
+	auto staircase0 = Model::LoadModel("../../../assets/scenes/staircase.obj");
+	std::vector<Model> models;
+	models.push_back(staircase0);
+
+	return std::make_tuple(std::move(models), std::vector<Texture>());
+}
+
+SceneAssets SceneList::Teapot_ycpin(CameraInitialSate &camera)
+{
+	vec3 cameraPosition = vec3(0.79609, 3.21916, 0.23353);
+	vec3 targetPosition = vec3(-23.17016, -12.19366, 0.26728);
+	vec3 upDirection = vec3(0, 1, 0);
+
+	camera.ModelView = lookAt(cameraPosition, targetPosition, upDirection);
+
+	camera.FieldOfView = 20.0f;
+	camera.Aperture = 0.05f;
+	camera.FocusDistance = length(cameraPosition - targetPosition);
+	camera.ControlSpeed = 2.0f;
+	camera.GammaCorrection = false;
+	camera.HasSky = true;
+	camera.LightPosition = vec3(0, 0, 0);
+
+	auto teapot0 = Model::LoadModel("../../../assets/scenes/teapot.obj");
+	std::vector<Model> models;
+	models.push_back(teapot0);
+
+	return std::make_tuple(std::move(models), std::vector<Texture>());
 }
