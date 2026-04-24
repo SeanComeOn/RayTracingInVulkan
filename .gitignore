@@ -77,7 +77,7 @@ StyleCopReport.xml
 *.tlh
 *.tmp
 *.tmp_proj
-*.log
+# *.log
 *.vspscc
 *.vssscc
 .builds
@@ -330,7 +330,17 @@ ASALocalRun/
 .mfractor/
 
 # Extras
-build
+build/
+.vscode/
+*.log
+*.ppm
+*.ptx
+*.csv
+image.binary
+gpgpu_inst_stats.txt
+gpgpusim.config
+inst_debug.txt
+
 
 # VSCode workspace
 *-workspace
