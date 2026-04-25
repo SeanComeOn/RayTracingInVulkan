@@ -1,0 +1,14 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Prepare Baseline Launch Env",
+            "type": "shell",
+            "command": "${workspaceFolder}/../setup_vscode_launch.bash",
+            "options": {
+                "cwd": "${workspaceFolder}/.."
+            },
+            "problemMatcher": []
+        }
+    ]
+}

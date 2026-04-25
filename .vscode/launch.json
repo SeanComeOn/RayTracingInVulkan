@@ -1,0 +1,69 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug Baseline RayTracer",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/linux/bin/RayTracer",
+            "args": [
+                "--benchmark",
+                "--scene", "1",
+                "--width", "1",
+                "--height", "1",
+                "--samples", "1",
+                "--present-mode", "0"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/build/linux/bin/",
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "envFile": "${workspaceFolder}/../vulkan-sim-root/vulkan-sim/cmpenv/new_vars.sh",
+            "preLaunchTask": "Prepare Baseline Launch Env",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "Debug AQB8 Baseline Scene",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/linux/bin/RayTracer",
+            "args": [
+                "--benchmark",
+                "--scene", "33",
+                "--width", "1",
+                "--height", "1",
+                "--samples", "1",
+                "--present-mode", "0"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/build/linux/bin/",
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "envFile": "${workspaceFolder}/../vulkan-sim-root/vulkan-sim/cmpenv/new_vars.sh",
+            "preLaunchTask": "Prepare Baseline Launch Env",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ]
+}
